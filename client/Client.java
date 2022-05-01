@@ -12,6 +12,7 @@ public class Client {
         Socket socket;
         PrintStream output = null;
         Scanner input = null;
+        Scanner teclado = null; 
 
         // criação do socket a pedido de conexão
         try {
@@ -25,9 +26,15 @@ public class Client {
         try {
             output = new PrintStream(socket.getOutputStream()); // para escrever para o servidor
             input = new Scanner(socket.getInputStream()); // para ler a mensagem do servidor
-            output.println("Boa noite SERVIDOR <3");
-            String msg = input.nextLine(); // recebe a msg do input
-            System.out.println("Recebido: " + msg);
+            teclado = new Scanner(System.in); //permite que seja escrita meg no teclado para o servidor 
+            String msg; // recebe a msg do teclado 
+            
+            do { 
+                System.out.println("Digite a mensagem: "); 
+                msg = teclado.nextLine(); 
+                output.println(msg); 
+            } while (!msg.equalsIgnoreCase("exit")); 
+            
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

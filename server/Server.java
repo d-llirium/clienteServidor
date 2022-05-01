@@ -38,10 +38,14 @@ public class Server { // cada vez que se roda abre um novo servidor
         try {
             input = new Scanner(clientSocket.getInputStream()); // para ler a mensagem do cliente
             output = new PrintStream(clientSocket.getOutputStream()); // para escrever mensagem para o cliente
+            String msg;// recebe a msg do input
+
+            do { 
+                msg = input.nextLine(); 
+                System.out.println("Recebido: " + msg); 
+                
+            } while (!msg.equalsIgnoreCase("exit")); 
             
-            String msg = input.nextLine(); // recebe a msg do input
-            System.out.println("Recebido: " + msg);
-            output.println("Boa noite CLIENTE!");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
